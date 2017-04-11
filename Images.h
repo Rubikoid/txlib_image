@@ -30,18 +30,18 @@ class ImageSheet {
         nY = sizeY;
     }
 
-    void draw(int x, int y) {
-        txTransparentBlt(getDC(), x, y, dX, dY, image, posX, posY, TX_WHITE);
+    void draw(int x, int y, int xMove = 0, int yMove = 0) {
+        txTransparentBlt(getDC(), x, y, dX, dY, image, (posX+xMove)*dX, (posY+yMove)*dY, RGB(0,96,64));
     }
 
     void moveRight() {
-        posX += dX;
-        if(posX == nX) posX = 0;
+        posX += 1;
+        if(posX == nX/dX) posX = 0;
     }
 
     void moveLeft() {
-        posX -= dX;
-        if(posX < 0) posX = nX-dX;
+        posX -= 1;
+        if(posX < 0) posX = nX/dX - 1;
     }
 
     ~ImageSheet() {
