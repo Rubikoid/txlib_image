@@ -19,13 +19,7 @@ int main(int argc, char* argv[]) {
     while(!KEY(VK_ESCAPE)) {
         resetCol();
         clear();
-        char a[20];
-        float f = 0.0;
-        if(MouseX() == 200) f = 90.0;
-        else f = atan((MouseY() - 200.0)/(MouseX() - 200.0)*-1)*180/M_PI;
-		sprintf(a, "%d;%d;%d", MouseX() - 200, MouseY() - 200, (int)fmod(f,22.5f));
-		txLine(200,200,MouseX(),MouseY());
-		textOut(1000, 50, a);
+        tank.mouseMagic(200.0,200.0);
         tank.draw(200,200);
         tank.draw(200,200, 0, 1);
         if(KEY(VK_RIGHT)) tank.moveRight();
