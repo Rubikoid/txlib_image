@@ -13,6 +13,16 @@
 #define uint 		unsigned int //govnokode for compare with vector.size()
 #define RADI_MASS   20
 
+double angleMagic(double fromX, double fromY, double toX, double toY);
+
+double angleMagic(double fromX, double fromY, double toX, double toY) {
+	double f = 0.0;
+	f = atan2((toY - fromY)*-1, toX - fromX) * 180 / M_PI;
+	f = 90 - f;
+	if (f < 0) f = (90 - f*-1) + 270;
+	return f;
+}
+
 class ImageSheet {
     public:
     HDC image;
@@ -29,6 +39,8 @@ class ImageSheet {
         nX = sizeX; //size of pic
         nY = sizeY;
     }
+	
+	ImageSheet() {}
 
     void draw(double x, double y, int xMove = -1, int yMove = -1) {
 		xMove = xMove == -1 ? posX : xMove;
@@ -47,12 +59,9 @@ class ImageSheet {
     }
 
     double mouseMagic(double x, double y) {
-        double f = 0.0;
-        x+= dX/2.0;
-        y+= dY/2.0;
-        f = atan2((MouseY() - y)*-1,MouseX() - x)*180/M_PI;
-		f = 90 - f;
-		if (f < 0) f = (90 - f*-1) + 270;
+		x += dX / 2.0;
+		y += dY / 2.0;
+		double f = angleMagic(x, y, MouseX(), MouseY());
 		txLine(x,y,MouseX(),MouseY());
 		return f;
 	}
