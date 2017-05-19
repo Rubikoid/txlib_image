@@ -44,17 +44,19 @@ class ImageSheet {
         if(posX < 0) posX = nX/dX - 1;
     }
 
-    void mouseMagic(float x, float y) {
-        char a[20];
+    float mouseMagic(float x, float y) {
+        char a[100];
         float f = 0.0;
         x+= dX/2.0;
         y+= dY/2.0;
-        if(MouseX() == x) f = 90.0;
-        else f = atan((MouseY() - y)/(MouseX() - x)*-1)*180/M_PI;
-		sprintf(a, "%f;%f", MouseX() - x, MouseY() - y);
-		//txLine((double)x,(double)y,MouseX(),MouseY());
-		//textOut(1000, 50, a);
-    }
+        f = atan2((MouseY() - y)*-1,MouseX() - x)*180/M_PI;
+		f = 90 - f;
+		if (f < 0) f = (90 - f*-1) + 270;
+		sprintf(a, "%f;%f;%f", MouseX() - x, MouseY() - y, f);
+		txLine((double)x,(double)y,MouseX(),MouseY());
+		textOut(1000, 50, a);
+		return f;
+	}
 
     ~ImageSheet() {
         txDeleteDC(image);

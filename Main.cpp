@@ -11,7 +11,7 @@ int iRand(int min, int max) {
 int main(int argc, char* argv[]) {
     //vars
     long Time = 0, T0 = 0;
-    init(WIDTH, HEIGHT);
+    HWND windows = init(WIDTH, HEIGHT);
     ImageSheet tank = ImageSheet("tank.bmp", 64, 64, 1024, 128);
     Time = TIME;
     T0 = Time;
@@ -19,13 +19,14 @@ int main(int argc, char* argv[]) {
     while(!KEY(VK_ESCAPE)) {
         resetCol();
         clear();
-        tank.mouseMagic(200.0,200.0);
-        tank.draw(200,200);
-        tank.draw(200,200, 0, 1);
+        int angle = tank.mouseMagic(200.0,200.0);
+		if (angle >= 352) angle = 351;
+		tank.draw(200,200);
+        tank.draw(200,200, angle/22, 1);
         if(KEY(VK_RIGHT)) tank.moveRight();
         else if(KEY(VK_LEFT)) tank.moveLeft();
         gsleep(10);
     }
-    end();
-    return 0;
+	end();
+	return 0;
 }

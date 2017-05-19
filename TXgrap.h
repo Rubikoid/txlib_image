@@ -17,12 +17,13 @@ void boxColor();
 HDC loadImage(char* imageName);
 HDC& getDC();
 
-void init(int x, int y)
+HWND init(int x, int y)
 {
-    txCreateWindow(x,y, true);
+    HWND desc = txCreateWindow(x,y, true);
     txTextCursor(false);
     resetCol();
     txClear();
+	return desc;
 }
 
 void resetCol()
