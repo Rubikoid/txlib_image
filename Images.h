@@ -1,17 +1,7 @@
 #ifndef IMG_H
 #define IMG_H
 
-#include <vector>
-#include <string>
-#include <stdio.h>
-#include <cmath>
-#include "TXgrap.h"
-//#include "Vector.h"
-
-#define TIME		GetTickCount()/100
-#define KEY			GetAsyncKeyState
-#define uint 		unsigned int //govnokode for compare with vector.size()
-#define RADI_MASS   20
+#include "Balls.h"
 
 double angleMagic(double fromX, double fromY, double toX, double toY);
 
@@ -39,6 +29,16 @@ class ImageSheet {
         nX = sizeX; //size of pic
         nY = sizeY;
     }
+
+	ImageSheet(HDC *_image, int deltaX, int deltaY, int sizeX, int sizeY) {
+		image = *_image;
+		dX = deltaX; //size of one
+		dY = deltaY;
+		posX = 0; //pos in pic
+		posY = 0;
+		nX = sizeX; //size of pic
+		nY = sizeY;
+	}
 	
 	ImageSheet() {}
 
